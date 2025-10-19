@@ -1,0 +1,13 @@
+docker run --name sqlx_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=secret123 -e POSTGRES_DB=mydb -p 5432:5432 -d postgres
+
+docker ps
+
+CALLING THE DB FROM DOCKER
+docker exec -it sqlx_db psql -U admin -d mydb
+
+postgres://admin:secret123@localhost:5432/mydb
+
+In CMD
+set DATABASE_URL=postgres://admin:secret123@localhost:5432/mydb
+
+sqlx migrate add profile_table
