@@ -28,10 +28,9 @@ async fn main() {
     let addr = SocketAddr::from(([0, 0, 0, 0], port));
     println!("🚀 Server running on port {}", port);
 
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+   let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+//    println!("Server Running on port {}")
+   axum::serve(listener,app).await.unwrap();
 }
 
 async fn root() -> Json<serde_json::Value> {
